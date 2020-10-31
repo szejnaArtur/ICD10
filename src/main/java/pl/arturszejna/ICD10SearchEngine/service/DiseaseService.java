@@ -13,17 +13,16 @@ public class DiseaseService {
     private DiseaseRepository diseaseRepository;
 
     @Autowired
-    public DiseaseService(DiseaseRepository diseaseRepository){
+    public DiseaseService(DiseaseRepository diseaseRepository) {
         this.diseaseRepository = diseaseRepository;
     }
 
-    public List<Disease> getAllDisease(){
+    public List<Disease> getDiseases() {
         return diseaseRepository.findAll();
     }
 
-    public void find(){
-        List<Disease> all = diseaseRepository.findAllByNameFirstLetter("kr");
-        all.forEach(System.out::println);
+    public List<Disease> findByKeyword(String keyword) {
+        return diseaseRepository.findByKeyword(keyword);
     }
 
 }
