@@ -27,4 +27,11 @@ public class Disease {
     @Column
     private String description;
 
+    public static Disease of(String code, String name){
+        Disease disease = new Disease();
+        disease.setCode(code);
+        disease.setName(name);
+        return disease;
+    }
+
 }
