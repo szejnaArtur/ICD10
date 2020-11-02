@@ -12,26 +12,19 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Disease {
+public class UnitDisease {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long disease_id;
+    private Long unit_disease_id;
 
     @Column
     private String code;
 
-    @Column
-    private String name;
+    @Column String name;
 
-    @Column
-    private String description;
-
-    public static Disease of(String code, String name){
-        Disease disease = new Disease();
-        disease.setCode(code);
-        disease.setName(name);
-        return disease;
-    }
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "main_disease_id")
+    private MainDisease mainDisease;
 
 }

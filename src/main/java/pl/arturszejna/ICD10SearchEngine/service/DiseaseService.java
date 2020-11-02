@@ -2,27 +2,27 @@ package pl.arturszejna.ICD10SearchEngine.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.arturszejna.ICD10SearchEngine.entity.Disease;
-import pl.arturszejna.ICD10SearchEngine.repository.DiseaseRepository;
+import pl.arturszejna.ICD10SearchEngine.entity.MainDisease;
+import pl.arturszejna.ICD10SearchEngine.repository.MainDiseaseRepository;
 
 import java.util.List;
 
 @Service
 public class DiseaseService {
 
-    private DiseaseRepository diseaseRepository;
+    private MainDiseaseRepository mainDiseaseRepository;
 
     @Autowired
-    public DiseaseService(DiseaseRepository diseaseRepository) {
-        this.diseaseRepository = diseaseRepository;
+    public DiseaseService(MainDiseaseRepository diseaseRepository) {
+        this.mainDiseaseRepository = diseaseRepository;
     }
 
-    public List<Disease> getDiseases() {
-        return diseaseRepository.findAll();
+    public List<MainDisease> getMainDiseases() {
+        return mainDiseaseRepository.findAll();
     }
 
-    public List<Disease> findByKeyword(String keyword) {
-        return diseaseRepository.findByKeyword(keyword);
+    public List<MainDisease> findByKeyword(String keyword) {
+        return mainDiseaseRepository.findByKeyword(keyword);
     }
 
 }

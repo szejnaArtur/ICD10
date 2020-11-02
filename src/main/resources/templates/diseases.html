@@ -57,18 +57,40 @@
                     </div>
                 </div>
             </div>
+
+            <!--expandable table-->
             <table class="table">
                 <thead>
                 <tr>
                     <th style="width: 15%;">Code</th>
                     <th style="width: 85%;">Name</th>
+
                 </tr>
                 </thead>
+
                 <tbody th:each="disease : ${diseases}">
                 <tr>
                     <td th:text="${disease.code}"></td>
                     <td th:text="${disease.name}"></td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <ul th:each="unit : ${disease.unitDiseases}">
+                            <li th:text="${unit.code}"></li>
+                            <li th:text="${unit.name}"></li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <!--                <table>-->
+
+                <!--                    <tbody th:each="unit : ${disease.unitDiseases}">-->
+                <!--                    <td th:text="${unit.code}"></td>-->
+                <!--                    <td th:text="${unit.name}"></td>-->
+                <!--                    </tbody>-->
+                <!--                </table>-->
+                </tbody>
             </table>
         </div>
     </div>

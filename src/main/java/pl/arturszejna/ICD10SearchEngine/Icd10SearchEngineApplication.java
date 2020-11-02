@@ -12,5 +12,6 @@ public class Icd10SearchEngineApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Icd10SearchEngineApplication.class, args);
+
     }
 }

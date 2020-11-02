@@ -2,8 +2,8 @@ package pl.arturszejna.ICD10SearchEngine.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.arturszejna.ICD10SearchEngine.entity.Disease;
-import pl.arturszejna.ICD10SearchEngine.repository.DiseaseRepository;
+import pl.arturszejna.ICD10SearchEngine.entity.MainDisease;
+import pl.arturszejna.ICD10SearchEngine.repository.MainDiseaseRepository;
 
 @Service
 public class DiseaseTextConverterService {
@@ -95,10 +95,10 @@ public class DiseaseTextConverterService {
             "(A98) - Inne wirusowe gorączki krwotoczne niesklasyfikowane gdzie indziej\n" +
             "(A99) - Nieokreślona wirusowa gorączka krwotoczna";
 
-    private DiseaseRepository diseaseRepository;
+    private MainDiseaseRepository diseaseRepository;
 
     @Autowired
-    public DiseaseTextConverterService(DiseaseRepository diseaseRepository){
+    public DiseaseTextConverterService(MainDiseaseRepository diseaseRepository){
         this.diseaseRepository = diseaseRepository;
     }
 
@@ -109,7 +109,7 @@ public class DiseaseTextConverterService {
 
             String code = disease.substring(1, 4);
             String name = disease.substring(8);
-            Disease newDisease = Disease.of(code, name);
+            MainDisease newDisease = MainDisease.of(code, name);
             //diseaseRepository.save(newDisease);
         }
 
