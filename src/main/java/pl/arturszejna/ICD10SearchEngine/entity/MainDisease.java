@@ -29,10 +29,10 @@ public class MainDisease {
     private List<UnitDisease> unitDiseases;
 
     public static MainDisease of(String code, String name){
-        MainDisease disease = new MainDisease();
-        disease.setCode(code);
-        disease.setName(name);
-        return disease;
+        MainDisease mainDisease = new MainDisease();
+        mainDisease.setCode(code);
+        mainDisease.setName(name);
+        return mainDisease;
     }
 
 }

@@ -8,12 +8,12 @@ import pl.arturszejna.ICD10SearchEngine.repository.MainDiseaseRepository;
 import java.util.List;
 
 @Service
-public class DiseaseService {
+public class MainDiseaseService {
 
     private MainDiseaseRepository mainDiseaseRepository;
 
     @Autowired
-    public DiseaseService(MainDiseaseRepository diseaseRepository) {
+    public MainDiseaseService(MainDiseaseRepository diseaseRepository) {
         this.mainDiseaseRepository = diseaseRepository;
     }
 

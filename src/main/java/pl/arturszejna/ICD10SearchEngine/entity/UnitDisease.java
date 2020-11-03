@@ -21,7 +21,11 @@ public class UnitDisease {
     @Column
     private String code;
 
-    @Column String name;
+    @Column
+    private String name;
+
+    @Column
+    private String description;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "main_disease_id")
