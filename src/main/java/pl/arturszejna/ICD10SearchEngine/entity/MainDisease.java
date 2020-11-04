@@ -25,6 +25,9 @@ public class MainDisease {
     @Column
     private String name;
 
+    @Column
+    private String description;
+
     @OneToMany(mappedBy = "mainDisease", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<UnitDisease> unitDiseases;
 
@@ -32,6 +35,14 @@ public class MainDisease {
         MainDisease mainDisease = new MainDisease();
         mainDisease.setCode(code);
         mainDisease.setName(name);
+        return mainDisease;
+    }
+
+    public static MainDisease of(String code, String name, String description){
+        MainDisease mainDisease = new MainDisease();
+        mainDisease.setCode(code);
+        mainDisease.setName(name);
+        mainDisease.setDescription(description);
         return mainDisease;
     }
 

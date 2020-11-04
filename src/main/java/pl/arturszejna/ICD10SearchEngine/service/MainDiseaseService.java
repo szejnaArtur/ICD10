@@ -25,4 +25,8 @@ public class MainDiseaseService {
         return mainDiseaseRepository.findByKeyword(keyword);
     }
 
+    public void addMainDisease(MainDisease mainDisease){
+        mainDiseaseRepository.save(mainDisease);
+    }
+
 }
