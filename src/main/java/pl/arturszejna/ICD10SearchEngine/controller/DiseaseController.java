@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import pl.arturszejna.ICD10SearchEngine.entity.MainDisease;
 import pl.arturszejna.ICD10SearchEngine.entity.UnitDisease;
 import pl.arturszejna.ICD10SearchEngine.service.MainDiseaseService;
@@ -35,17 +34,24 @@ public class DiseaseController {
     @GetMapping("/diseases/add")
     public String addMainDisease() {
 
-        String text = "A05 Inne bakterie zawarte w pokarmie powodujące zatrucia niesklasyfikowane gdzie indziej\n" +
-                "Nie obejmuje: zakażenia wywołane przez Escherichia coli (A04.0–A04.4), listerioza (A32.–), zatrucie pokarmowe i zakażenie wywołane przez Salmonella (A02.–), zatrucie spowodowane przez szkodliwe produkty spożywcze (T61–T62)\n" +
-                "A05.0 Pokarmowe zatrucie gronkowcowe\n" +
-                "A05.1 Zatrucie pokarmowe wywołane przez Clostridium botulinum\n" +
-                "Klasyczne zatrucie pokarmowe wywołane przez Clostridium botulinum\n" +
-                "A05.2 Zatrucie pokarmowe wywołane przez Clostridium perfringens [Clostridium welchii]\n" +
-                "Martwicze zapalenie jelit. Pig-bel\n" +
-                "A05.3 Zatrucie pokarmowe wywołane przez Vibrio parahaemolyticus\n" +
-                "A05.4 Zatrucie pokarmowe wywołane przez Bacillus cereus\n" +
-                "A05.8 Inne określone bakteryjne zatrucia pokarmowe\n" +
-                "A05.9 Bakteryjne zatrucie pokarmowe, nieokreślone ";
+        String text = "A06 Choroba zakaźna wywołana przez Entamoeba histolytica [pełzakowica] [ameboza]\n" +
+                "Obejmuje: zakażenia wywołane przez Entamoeba histolytica. Nie obejmuje: inne pierwotniakowe choroby jelit (A07.–)\n" +
+                "A06.0 Ostra czerwonka pełzakowa\n" +
+                "Ostra pełzakowica. Pełzakowe zapalenie jelit BNO\n" +
+                "A06.1 Przewlekła pełzakowica jelitowa\n" +
+                "A06.2 Pełzakowy nieczerwonkowy nieżyt jelita grubego\n" +
+                "A06.3 Guz pełzakowy jelita\n" +
+                "Guz pełzakowy BNO\n" +
+                "A06.4 Pełzakowy ropień wątroby\n" +
+                "Pełzakowe zapalenie wątroby\n" +
+                "A06.5 Pełzakowy ropień płuc (J99.8*)\n" +
+                "Pełzakowy ropień płuc (i wątroby)\n" +
+                "A06.6 Pełzakowy ropień mózgu (G07*)\n" +
+                "Pełzakowy ropień mózgu (i wątroby) (i płuc)\n" +
+                "A06.7 Pełzakowica skórna\n" +
+                "A06.8 Pełzakowe zakażenie o innym umiejscowieniu\n" +
+                "Pełzakowe: • zapalenie wyrostka robaczkowego, • zapalenie żołędzi prącia† (N51.2*)\n" +
+                "A06.9 Pełzakowica, nieokreślona \n";
 
         MainDisease newDisease = new MainDisease();
         List<UnitDisease> unitDiseasesList = new ArrayList<>();
