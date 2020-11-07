@@ -18,7 +18,7 @@
 .mainDiseaseDescriptionColumn {
     width: 100%;
     font-size: 12px;
-    padding-left: 15px;
+    padding-left: 10px;
 }
 
 .unitDiseaseTable {
@@ -42,7 +42,6 @@
 
 .unitDiseaseDescriptionColumn {
     font-size: 12px;
-    padding-left: 10px;
 }
 
 .unitDiseaseTableRow {
@@ -50,16 +49,21 @@
     border: 1px solid gray;
 }
 
-.mainDiseaseRow{
+.mainDiseaseRow {
     width: 100%;
 }
 
-.unitDiseaseRow{
+.unitDiseaseRow {
     width: 100%;
 }
 
-table{
+table {
     width: 100%;
+}
+
+.listStyleNone {
+    list-style-type: none;
+    padding-left: 0;
 }
 
 

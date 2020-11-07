@@ -34,24 +34,23 @@ public class DiseaseController {
     @GetMapping("/diseases/add")
     public String addMainDisease() {
 
-        String text = "A06 Choroba zakaźna wywołana przez Entamoeba histolytica [pełzakowica] [ameboza]\n" +
-                "Obejmuje: zakażenia wywołane przez Entamoeba histolytica. Nie obejmuje: inne pierwotniakowe choroby jelit (A07.–)\n" +
-                "A06.0 Ostra czerwonka pełzakowa\n" +
-                "Ostra pełzakowica. Pełzakowe zapalenie jelit BNO\n" +
-                "A06.1 Przewlekła pełzakowica jelitowa\n" +
-                "A06.2 Pełzakowy nieczerwonkowy nieżyt jelita grubego\n" +
-                "A06.3 Guz pełzakowy jelita\n" +
-                "Guz pełzakowy BNO\n" +
-                "A06.4 Pełzakowy ropień wątroby\n" +
-                "Pełzakowe zapalenie wątroby\n" +
-                "A06.5 Pełzakowy ropień płuc (J99.8*)\n" +
-                "Pełzakowy ropień płuc (i wątroby)\n" +
-                "A06.6 Pełzakowy ropień mózgu (G07*)\n" +
-                "Pełzakowy ropień mózgu (i wątroby) (i płuc)\n" +
-                "A06.7 Pełzakowica skórna\n" +
-                "A06.8 Pełzakowe zakażenie o innym umiejscowieniu\n" +
-                "Pełzakowe: • zapalenie wyrostka robaczkowego, • zapalenie żołędzi prącia† (N51.2*)\n" +
-                "A06.9 Pełzakowica, nieokreślona \n";
+        String text = "A30 Choroba zakaźna wywołana przez Mycobacterium leprae [trąd] [choroba Hansena]\n" +
+                "Obejmuje: zakażenie wywołane przez Mycobacterium leprae\n" +
+                "Nie obejmuje: następstwa trądu (B92)\n" +
+                "A30.0 Trąd, postać nieokreślona\n" +
+                "Trąd I\n" +
+                "A30.1 Trąd, postać tuberkuloidowa\n" +
+                "Trąd TT\n" +
+                "A30.2 Trąd, postać tuberkuloidowa graniczna\n" +
+                "Trąd BT\n" +
+                "A30.3 Trąd, postać graniczna\n" +
+                "Trąd BB\n" +
+                "A30.4 Trąd, postać lepromatyczna graniczna\n" +
+                "Trąd BL\n" +
+                "A30.5 Trąd, postać lepromatyczna\n" +
+                "Trąd LL\n" +
+                "A30.8 Inne postacie trądu\n" +
+                "A30.9 Trąd, nieokreślony";
 
         MainDisease newDisease = new MainDisease();
         List<UnitDisease> unitDiseasesList = new ArrayList<>();
@@ -65,9 +64,16 @@ public class DiseaseController {
                 newDisease.setName(name);
                 loop += 1;
             } else {
-                if(loop == 1 && !isNumeric(i.substring(1, 3))){
-                    newDisease.setDescription(i);
-                    loop += 1;
+                if (loop == 1 && !isNumeric(i.substring(1, 3))) {
+                    if (i.substring(0, 8).equals("Obejmuje")) {
+                        newDisease.setIt_includes(i);
+                    } else if (i.substring(0, 12).equals("Nie obejmuje")) {
+                        newDisease.setIt_does_not_includes(i);
+                    } else if (i.substring(0, 5).equals("Uwaga")){
+                        newDisease.setWarning(i);
+                    } else {
+                        newDisease.setDescription(i);
+                    }
                 } else {
                     if (isNumeric(i.substring(1, 3))) {
                         String code = i.substring(0, 5);

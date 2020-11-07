@@ -28,6 +28,15 @@ public class MainDisease {
     @Column
     private String description;
 
+    @Column
+    private String it_includes;
+
+    @Column
+    private String it_does_not_includes;
+
+    @Column
+    private String warning;
+
     @OneToMany(mappedBy = "mainDisease", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<UnitDisease> unitDiseases;
 
@@ -35,14 +44,6 @@ public class MainDisease {
         MainDisease mainDisease = new MainDisease();
         mainDisease.setCode(code);
         mainDisease.setName(name);
-        return mainDisease;
-    }
-
-    public static MainDisease of(String code, String name, String description){
-        MainDisease mainDisease = new MainDisease();
-        mainDisease.setCode(code);
-        mainDisease.setName(name);
-        mainDisease.setDescription(description);
         return mainDisease;
     }
 

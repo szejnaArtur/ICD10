@@ -44,6 +44,14 @@
                     }
                 });
             });
+
+            $("#mainDiseaseDescription ol").each(function () {
+                let $row = $(this);
+                let description = $row.find("li").text();
+                if (description === "") {
+                    $row.hide();
+                }
+            })
         });
     </script>
 
@@ -80,8 +88,14 @@
                                 <td class="mainDiseaseNameColumn" th:text="${disease.name}"></td>
                             </tr>
                             <tr>
-                                <td class="mainDiseaseDescriptionColumn" colspan="3"
-                                    th:text="${disease.description}"></td>
+                                <td class="mainDiseaseDescriptionColumn" id="mainDiseaseDescription" colspan="3">
+                                    <ol class="listStyleNone">
+                                        <li th:text="${disease.description}"></li>
+                                        <li th:text="${disease.it_includes}"></li>
+                                        <li th:text="${disease.it_does_not_includes}"></li>
+                                        <li th:text="${disease.warning}"></li>
+                                    </ol>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -104,26 +118,6 @@
                 </tr>
                 </tbody>
             </table>
-
-
-            <!--                <tbody th:each="disease : ${diseases}">-->
-            <!--                <tr style="background-color: #26A69A">-->
-            <!--                    <td style="width: 15%" th:text="${disease.code}"></td>-->
-            <!--                    <td style="width: 85%" th:text="${disease.name}"></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                    <td colspan="3" th:text="${disease.description}"></td>-->
-            <!--                </tr>-->
-            <!--                <tr style="background-color: #E0F2F1">-->
-            <!--                    <td colspan="3">-->
-            <!--                        <ul th:each="unit : ${disease.unitDiseases}">-->
-            <!--                            <li th:text="${unit.code}"></li>-->
-            <!--                            <li style="list-style-type: none" th:text="${unit.name}"></li>-->
-            <!--                            <li style="list-style-type: none; font-size: 12px" th:text="${unit.description}"></li>-->
-            <!--                        </ul>-->
-            <!--                    </td>-->
-            <!--                </tr>-->
-            <!--                </tbody>-->
         </div>
     </div>
 </div>
