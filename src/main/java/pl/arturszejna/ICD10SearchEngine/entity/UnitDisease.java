@@ -27,6 +27,15 @@ public class UnitDisease {
     @Column
     private String description;
 
+    @Column
+    private String it_includes;
+
+    @Column
+    private String it_does_not_includes;
+
+    @Column
+    private String warning;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "main_disease_id")
     private MainDisease mainDisease;
@@ -39,14 +48,4 @@ public class UnitDisease {
         unitDisease.setMainDisease(mainDisease);
         return unitDisease;
     }
-
-    public static UnitDisease of(String code, String name, String description, MainDisease mainDisease){
-        UnitDisease unitDisease = new UnitDisease();
-        unitDisease.setCode(code);
-        unitDisease.setName(name);
-        unitDisease.setDescription(description);
-        unitDisease.setMainDisease(mainDisease);
-        return unitDisease;
-    }
-
 }

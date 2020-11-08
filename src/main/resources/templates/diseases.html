@@ -45,13 +45,21 @@
                 });
             });
 
-            $("#mainDiseaseDescription ol").each(function () {
+            $("#main-description ol").each(function () {
                 let $row = $(this);
                 let description = $row.find("li").text();
                 if (description === "") {
                     $row.hide();
                 }
-            })
+            });
+
+            $("#unit-description ol").each(function () {
+                let $row = $(this);
+                let description = $row.find("li").text();
+                if (description === "") {
+                    $row.hide();
+                }
+            });
         });
     </script>
 
@@ -69,7 +77,6 @@
                         <div class="search-box">
                             <div class="input-group">
                                 <input type="text" id="search" class="form-control" placeholder="Search by Name">
-                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
                             </div>
                         </div>
                     </div>
@@ -81,15 +88,15 @@
                 <tbody th:each="disease : ${diseases}">
                 <tr>
                     <td>
-                        <table class="mainDiseaseTable">
-                            <tbody class="mainDiseaseTableRow">
-                            <tr class="mainDiseaseRow">
-                                <td rowspan="2" class="mainDiseaseCodeColumn" th:text="${disease.code}"></td>
-                                <td class="mainDiseaseNameColumn" th:text="${disease.name}"></td>
+                        <table class="background-color-main full-width border-black">
+                            <tbody>
+                            <tr class="full-width">
+                                <td class="code-column" rowspan="2"  th:text="${disease.code}"></td>
+                                <td class="name-column border-black-right" th:text="${disease.name}"></td>
                             </tr>
                             <tr>
-                                <td class="mainDiseaseDescriptionColumn" id="mainDiseaseDescription" colspan="3">
-                                    <ol class="listStyleNone">
+                                <td class="description-column" id="main-description" colspan="3">
+                                    <ol class="list-style-none">
                                         <li th:text="${disease.description}"></li>
                                         <li th:text="${disease.it_includes}"></li>
                                         <li th:text="${disease.it_does_not_includes}"></li>
@@ -103,14 +110,21 @@
                 </tr>
                 <tr>
                     <td>
-                        <table class="unitDiseaseTable">
-                            <tbody th:each="unit : ${disease.unitDiseases}" class="unitDiseaseTableRow">
-                            <tr class="unitDiseaseRow">
-                                <td class="unitDiseaseCodeColumn" rowspan="2" th:text="${unit.code}"></td>
-                                <td class="unitDiseaseNameColumn" th:text="${unit.name}"></td>
+                        <table class="full-width unit-table">
+                            <tbody th:each="unit : ${disease.unitDiseases}" class="full-width border-gray">
+                            <tr class="full-width ">
+                                <td class="code-column border-gray" rowspan="2" th:text="${unit.code}"></td>
+                                <td class="name-column border-gray-right" th:text="${unit.name}"></td>
                             </tr>
                             <tr>
-                                <td class="unitDiseaseDescriptionColumn" colspan="2" th:text="${unit.description}"></td>
+                                <td class="description-column" colspan="3" id="unit-description">
+                                    <ol class="list-style-none">
+                                        <li th:text="${unit.description}"></li>
+                                        <li th:text="${unit.it_includes}"></li>
+                                        <li th:text="${unit.it_does_not_includes}"></li>
+                                        <li th:text="${unit.warning}"></li>
+                                    </ol>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
