@@ -43,6 +43,14 @@
                         $row.show();
                     }
                 });
+
+                // let inputText = document.getElementById("inputText");
+                // let innerHTML = inputText.innerHTML;
+                // let index = innerHTML.indexOf(term);
+                // if (index >= 0) {
+                //     innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+term.length) + "</span>" + innerHTML.substring(index + term.length);
+                //     inputText.innerHTML = innerHTML;
+                // }
             });
 
             $("#main-description ol").each(function () {
@@ -61,6 +69,17 @@
                 }
             });
         });
+
+        // function highlight(text) {
+        //     let inputText = document.getElementById("inputText");
+        //     let innerHTML = inputText.innerHTML;
+        //     let index = innerHTML.indexOf(text);
+        //     if (index >= 0) {
+        //         innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+        //         inputText.innerHTML = innerHTML;
+        //     }
+        // }
+
     </script>
 
 </head>
@@ -83,6 +102,35 @@
                 </div>
             </div>
 
+            <div style="text-align: center; margin: 10px">
+                <a>A</a>
+                <a>B</a>
+                <a>C</a>
+                <a>D</a>
+                <a>E</a>
+                <a>F</a>
+                <a>G</a>
+                <a>H</a>
+                <a>I</a>
+                <a>J</a>
+                <a>K</a>
+                <a>L</a>
+                <a>M</a>
+                <a>N</a>
+                <a>O</a>
+                <a>P</a>
+                <a>Q</a>
+                <a>R</a>
+                <a>S</a>
+                <a>T</a>
+                <a>U</a>
+                <a>V</a>
+                <a>W</a>
+                <a>X</a>
+                <a>Y</a>
+                <a>Z</a>
+            </div>
+
             <!--expandable table-->
             <table>
                 <tbody th:each="disease : ${diseases}">
@@ -91,16 +139,15 @@
                         <table class="background-color-main full-width border-black">
                             <tbody>
                             <tr class="full-width">
-                                <td class="code-column" rowspan="2"  th:text="${disease.code}"></td>
-                                <td class="name-column border-black-right" th:text="${disease.name}"></td>
+                                <td class="code-column" rowspan="2" th:text="${disease.code}"></td>
+                                <td id="inputText" class="name-column border-black-right" th:text="${disease.name}"></td>
                             </tr>
                             <tr>
                                 <td class="description-column" id="main-description" colspan="3">
                                     <ol class="list-style-none">
-                                        <li th:text="${disease.description}"></li>
-                                        <li th:text="${disease.it_includes}"></li>
-                                        <li th:text="${disease.it_does_not_includes}"></li>
-                                        <li th:text="${disease.warning}"></li>
+                                        <li th:each="description : ${disease.descriptions}">
+                                            <span th:text="${description.text}"></span>
+                                        </li>
                                     </ol>
                                 </td>
                             </tr>
@@ -119,10 +166,9 @@
                             <tr>
                                 <td class="description-column" colspan="3" id="unit-description">
                                     <ol class="list-style-none">
-                                        <li th:text="${unit.description}"></li>
-                                        <li th:text="${unit.it_includes}"></li>
-                                        <li th:text="${unit.it_does_not_includes}"></li>
-                                        <li th:text="${unit.warning}"></li>
+                                        <li th:each="description : ${unit.descriptions}">
+                                            <span th:text="${description.text}"></span>
+                                        </li>
                                     </ol>
                                 </td>
                             </tr>

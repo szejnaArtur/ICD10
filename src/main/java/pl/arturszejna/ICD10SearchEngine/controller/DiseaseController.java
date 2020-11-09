@@ -5,11 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.arturszejna.ICD10SearchEngine.entity.MainDisease;
+import pl.arturszejna.ICD10SearchEngine.entity.MainDiseaseDescription;
 import pl.arturszejna.ICD10SearchEngine.entity.UnitDisease;
+import pl.arturszejna.ICD10SearchEngine.entity.UnitDiseaseDescription;
 import pl.arturszejna.ICD10SearchEngine.service.MainDiseaseService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isNumeric;
 
 @Controller
 public class DiseaseController {
@@ -32,30 +36,28 @@ public class DiseaseController {
     }
 
     @GetMapping("/diseases/add")
-    public String addMainDisease() {
+    public String addDiseaseFromText() {
 
-        String text = "A30 Choroba zakaźna wywołana przez Mycobacterium leprae [trąd] [choroba Hansena]\n" +
-                "Obejmuje: zakażenie wywołane przez Mycobacterium leprae\n" +
-                "Nie obejmuje: następstwa trądu (B92)\n" +
-                "A30.0 Trąd, postać nieokreślona\n" +
-                "Trąd I\n" +
-                "A30.1 Trąd, postać tuberkuloidowa\n" +
-                "Trąd TT\n" +
-                "A30.2 Trąd, postać tuberkuloidowa graniczna\n" +
-                "Trąd BT\n" +
-                "A30.3 Trąd, postać graniczna\n" +
-                "Trąd BB\n" +
-                "A30.4 Trąd, postać lepromatyczna graniczna\n" +
-                "Trąd BL\n" +
-                "A30.5 Trąd, postać lepromatyczna\n" +
-                "Trąd LL\n" +
-                "A30.8 Inne postacie trądu\n" +
-                "A30.9 Trąd, nieokreślony";
+        String text = "A19 Gruźlica prosówkowa\n" +
+                "Obejmuje: gruźlica:\n" +
+                "• rozsiana\n" +
+                "• uogólniona\n" +
+                "gruźlicze zapalenie błon surowiczych\n" +
+                "A19.0 Gruźlica prosówkowa ostra o pojedynczej określonej lokalizacji\n" +
+                "A19.1 Gruźlica prosówkowa ostra o wielomiejscowej lokalizacji\n" +
+                "A19.2 Gruźlica prosówkowa ostra, nieokreślona\n" +
+                "A19.8 Inne postacie gruźlicy prosówkowej\n" +
+                "A19.9 Gruźlica prosówkowa, nieokreślona \n";
 
         MainDisease newDisease = new MainDisease();
-        List<UnitDisease> unitDiseasesList = new ArrayList<>();
+        List<MainDiseaseDescription> mainDiseaseDescriptions = new ArrayList<>();
+        List<UnitDisease> unitDiseases = new ArrayList<>();
+
         String[] split = text.split("\n");
+
         int loop = 0;
+        boolean isMain = true;
+
         for ( String i : split ) {
             if (loop == 0) {
                 String code = i.substring(0, 3);
@@ -64,33 +66,26 @@ public class DiseaseController {
                 newDisease.setName(name);
                 loop += 1;
             } else {
-                if (loop == 1 && !isNumeric(i.substring(1, 3))) {
-                    if (i.substring(0, 8).equals("Obejmuje")) {
-                        newDisease.setIt_includes(i);
-                    } else if (i.substring(0, 12).equals("Nie obejmuje")) {
-                        newDisease.setIt_does_not_includes(i);
-                    } else if (i.substring(0, 5).equals("Uwaga")){
-                        newDisease.setWarning(i);
-                    } else {
-                        newDisease.setDescription(i);
-                    }
+                if (isMain && !isNumeric(i.substring(1, 3))) {
+                    mainDiseaseDescriptions.add(MainDiseaseDescription.of(i, newDisease));
                 } else {
+                    isMain = false;
+
                     if (isNumeric(i.substring(1, 3))) {
                         String code = i.substring(0, 5);
                         String name = i.substring(6);
-                        unitDiseasesList.add(UnitDisease.of(code, name, newDisease));
-                        loop += 1;
+                        unitDiseases.add(UnitDisease.of(code, name, newDisease));
                     } else {
-                        unitDiseasesList.get(unitDiseasesList.size() - 1).setDescription(i);
-                        loop += 1;
+                        UnitDisease localUnitDisease = unitDiseases.get(unitDiseases.size() - 1);
+                        UnitDiseaseDescription description = UnitDiseaseDescription.of(i, localUnitDisease);
+                        localUnitDisease.getDescriptions().add(description);
                     }
                 }
             }
         }
-
-        newDisease.setUnitDiseases(unitDiseasesList);
+        newDisease.setDescriptions(mainDiseaseDescriptions);
+        newDisease.setUnitDiseases(unitDiseases);
         mainDiseaseService.addMainDisease(newDisease);
-
         return "diseases";
     }
 

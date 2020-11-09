@@ -127,3 +127,7 @@ body {
     position: relative;
     top: 2px;
 }
+
+.highlight {
+    background-color: yellow;
+}
