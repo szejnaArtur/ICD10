@@ -33,6 +33,7 @@
             // Filter table rows based on searched term
             $("#search").on("keyup", function () {
                 let term = $(this).val().toLowerCase();
+                searchHighlight(term);
                 $("table tbody").each(function () {
                     let $row = $(this);
                     let name = $row.find("tr td:nth-child(2)").text().toLowerCase();
@@ -43,14 +44,6 @@
                         $row.show();
                     }
                 });
-
-                // let inputText = document.getElementById("inputText");
-                // let innerHTML = inputText.innerHTML;
-                // let index = innerHTML.indexOf(term);
-                // if (index >= 0) {
-                //     innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+term.length) + "</span>" + innerHTML.substring(index + term.length);
-                //     inputText.innerHTML = innerHTML;
-                // }
             });
 
             $("#main-description ol").each(function () {
@@ -70,15 +63,24 @@
             });
         });
 
-        // function highlight(text) {
-        //     let inputText = document.getElementById("inputText");
-        //     let innerHTML = inputText.innerHTML;
-        //     let index = innerHTML.indexOf(text);
-        //     if (index >= 0) {
-        //         innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
-        //         inputText.innerHTML = innerHTML;
-        //     }
-        // }
+        function searchHighlight(searchText) {
+            let searchExp = new RegExp(searchText, "ig");
+            if (searchText) {
+
+                for (let i of $(".light")) {
+                    let content = i.innerHTML;
+                    let matches = content.match(searchExp);
+                    if (matches) {
+                        i.innerHTML = content.replace(searchExp, function (match) {
+                            return "<span class='highlight'/" + match + ">";
+                        });
+                        console.log(i);
+                    }
+                }
+            } else {
+                $(".highlight").removeClass("highlight");
+            }
+        }
 
     </script>
 
@@ -139,8 +141,8 @@
                         <table class="background-color-main full-width border-black">
                             <tbody>
                             <tr class="full-width">
-                                <td class="code-column" rowspan="2" th:text="${disease.code}"></td>
-                                <td id="inputText" class="name-column border-black-right" th:text="${disease.name}"></td>
+                                <td class="code-column light" rowspan="2" th:text="${disease.code}"></td>
+                                <td class="name-column border-black-right" th:text="${disease.name}"></td>
                             </tr>
                             <tr>
                                 <td class="description-column" id="main-description" colspan="3">

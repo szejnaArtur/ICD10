@@ -29,21 +29,12 @@ public class UnitDisease {
     @OneToMany(mappedBy = "unitDisease", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<UnitDiseaseDescription> descriptions;
 
-//    @Column
-//    private String it_includes;
-//
-//    @Column
-//    private String it_does_not_includes;
-//
-//    @Column
-//    private String warning;
-
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "main_disease_id")
     private MainDisease mainDisease;
 
 
-    public static UnitDisease of(String code, String name, MainDisease mainDisease){
+    public static UnitDisease of(String code, String name, MainDisease mainDisease) {
         UnitDisease unitDisease = new UnitDisease();
         unitDisease.setCode(code);
         unitDisease.setName(name);

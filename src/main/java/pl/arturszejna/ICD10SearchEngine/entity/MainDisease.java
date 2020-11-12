@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,19 +28,10 @@ public class MainDisease {
     @OneToMany(mappedBy = "mainDisease", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<MainDiseaseDescription> descriptions;
 
-//    @Column
-//    private String it_includes;
-//
-//    @Column
-//    private String it_does_not_includes;
-//
-//    @Column
-//    private String warning;
-
     @OneToMany(mappedBy = "mainDisease", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<UnitDisease> unitDiseases;
 
-    public static MainDisease of(String code, String name){
+    public static MainDisease of(String code, String name) {
         MainDisease mainDisease = new MainDisease();
         mainDisease.setCode(code);
         mainDisease.setName(name);

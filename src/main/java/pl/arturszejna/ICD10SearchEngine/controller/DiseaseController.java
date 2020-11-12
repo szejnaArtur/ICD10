@@ -13,8 +13,6 @@ import pl.arturszejna.ICD10SearchEngine.service.MainDiseaseService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isNumeric;
-
 @Controller
 public class DiseaseController {
 
@@ -38,16 +36,7 @@ public class DiseaseController {
     @GetMapping("/diseases/add")
     public String addDiseaseFromText() {
 
-        String text = "A19 Gruźlica prosówkowa\n" +
-                "Obejmuje: gruźlica:\n" +
-                "• rozsiana\n" +
-                "• uogólniona\n" +
-                "gruźlicze zapalenie błon surowiczych\n" +
-                "A19.0 Gruźlica prosówkowa ostra o pojedynczej określonej lokalizacji\n" +
-                "A19.1 Gruźlica prosówkowa ostra o wielomiejscowej lokalizacji\n" +
-                "A19.2 Gruźlica prosówkowa ostra, nieokreślona\n" +
-                "A19.8 Inne postacie gruźlicy prosówkowej\n" +
-                "A19.9 Gruźlica prosówkowa, nieokreślona \n";
+        String text = "";
 
         MainDisease newDisease = new MainDisease();
         List<MainDiseaseDescription> mainDiseaseDescriptions = new ArrayList<>();
