@@ -33,7 +33,9 @@
             // Filter table rows based on searched term
             $("#search").on("keyup", function () {
                 let term = $(this).val().toLowerCase();
-                searchHighlight(term);
+                $(".highlight").removeClass("highlight");
+                searchText(term);
+                //searchHighlight(term);
                 $("table tbody").each(function () {
                     let $row = $(this);
                     let name = $row.find("tr td:nth-child(2)").text().toLowerCase();
@@ -45,6 +47,23 @@
                     }
                 });
             });
+
+            function searchText(searchText) {
+                if (searchText) {
+                    $(".highlights").each(function () {
+                        let content = $(this).text();
+                        let searchExp = new RegExp(searchText, "ig");
+                        let matches = content.match(searchExp);
+                        if (matches) {
+                            $(this).html(content.replace(searchExp, function (match) {
+                                return "<span class='highlight'>" + match + "</span>";
+                            }))
+                        }
+                    })
+                } else {
+                    $(".highlight").removeClass("highlight");
+                }
+            }
 
             $("#main-description ol").each(function () {
                 let $row = $(this);
@@ -62,25 +81,6 @@
                 }
             });
         });
-
-        function searchHighlight(searchText) {
-            let searchExp = new RegExp(searchText, "ig");
-            if (searchText) {
-
-                for (let i of $(".light")) {
-                    let content = i.innerHTML;
-                    let matches = content.match(searchExp);
-                    if (matches) {
-                        i.innerHTML = content.replace(searchExp, function (match) {
-                            return "<span class='highlight'/" + match + ">";
-                        });
-                        console.log(i);
-                    }
-                }
-            } else {
-                $(".highlight").removeClass("highlight");
-            }
-        }
 
     </script>
 
@@ -131,6 +131,8 @@
                 <a>X</a>
                 <a>Y</a>
                 <a>Z</a>
+                <span> - </span>
+                <a>(ALL)</a>
             </div>
 
             <!--expandable table-->
@@ -141,14 +143,14 @@
                         <table class="background-color-main full-width border-black">
                             <tbody>
                             <tr class="full-width">
-                                <td class="code-column light" rowspan="2" th:text="${disease.code}"></td>
-                                <td class="name-column border-black-right" th:text="${disease.name}"></td>
+                                <td class="code-column highlights" rowspan="2" th:text="${disease.code}"></td>
+                                <td class="name-column border-black-right highlights" th:text="${disease.name}"></td>
                             </tr>
                             <tr>
                                 <td class="description-column" id="main-description" colspan="3">
                                     <ol class="list-style-none">
                                         <li th:each="description : ${disease.descriptions}">
-                                            <span th:text="${description.text}"></span>
+                                            <span class="highlights" th:text="${description.text}"></span>
                                         </li>
                                     </ol>
                                 </td>
@@ -162,14 +164,14 @@
                         <table class="full-width unit-table">
                             <tbody th:each="unit : ${disease.unitDiseases}" class="full-width border-gray">
                             <tr class="full-width ">
-                                <td class="code-column border-gray" rowspan="2" th:text="${unit.code}"></td>
-                                <td class="name-column border-gray-right" th:text="${unit.name}"></td>
+                                <td class="code-column border-gray highlights" rowspan="2" th:text="${unit.code}"></td>
+                                <td class="name-column border-gray-right highlights" th:text="${unit.name}"></td>
                             </tr>
                             <tr>
                                 <td class="description-column" colspan="3" id="unit-description">
                                     <ol class="list-style-none">
                                         <li th:each="description : ${unit.descriptions}">
-                                            <span th:text="${description.text}"></span>
+                                            <span class="highlights" th:text="${description.text}"></span>
                                         </li>
                                     </ol>
                                 </td>
