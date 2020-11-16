@@ -21,7 +21,7 @@ public class MainDiseaseService {
         return mainDiseaseRepository.findAll();
     }
 
-    public List<MainDisease> findByKeyword(String keyword) {
+    public List<MainDisease> findByCode(String keyword) {
         return mainDiseaseRepository.findByKeyword(keyword);
     }
 

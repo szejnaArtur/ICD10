@@ -4,7 +4,7 @@
     <meta charset="UTF-8" content="text/html">
     <title>Diseases Panel - Filtered</title>
 
-    <link type="text/css" href="css/table.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -105,8 +105,8 @@
             </div>
 
             <div style="text-align: center; margin: 10px">
-                <a>A</a>
-                <a>B</a>
+                <a href="/diseases/A">A</a>
+                <a href="/diseases/B">B</a>
                 <a>C</a>
                 <a>D</a>
                 <a>E</a>
@@ -132,7 +132,7 @@
                 <a>Y</a>
                 <a>Z</a>
                 <span> - </span>
-                <a>(ALL)</a>
+                <a href="/diseases">(ALL)</a>
             </div>
 
             <!--expandable table-->

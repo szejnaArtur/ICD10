@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import pl.arturszejna.ICD10SearchEngine.entity.MainDisease;
 import pl.arturszejna.ICD10SearchEngine.entity.MainDiseaseDescription;
 import pl.arturszejna.ICD10SearchEngine.entity.UnitDisease;
@@ -25,16 +26,20 @@ public class DiseaseController {
 
     @GetMapping("/diseases")
     public String getMainDiseases(Model model) {
+        List<MainDisease> mainDiseases = mainDiseaseService.getMainDiseases();
+        model.addAttribute("diseases", mainDiseases);
+        return "diseases";
+    }
 
-        List<MainDisease> mineDiseases = mainDiseaseService.getMainDiseases();
-
-        model.addAttribute("diseases", mineDiseases);
-
+    @GetMapping("/diseases/{code}")
+    public String getMainDiseasesByCode(Model model, @PathVariable("code") String code) {
+        List<MainDisease> mainDiseases = mainDiseaseService.findByCode(code);
+        model.addAttribute("diseases", mainDiseases);
         return "diseases";
     }
 
     @GetMapping("/diseases/add")
-    public String addDiseaseFromText() {
+    public String addDiseaseFromText(Model model) {
 
         String text = "";
 
@@ -75,6 +80,9 @@ public class DiseaseController {
         newDisease.setDescriptions(mainDiseaseDescriptions);
         newDisease.setUnitDiseases(unitDiseases);
         mainDiseaseService.addMainDisease(newDisease);
+
+        List<MainDisease> mainDiseases = mainDiseaseService.getMainDiseases();
+        model.addAttribute("diseases", mainDiseases);
         return "diseases";
     }
 

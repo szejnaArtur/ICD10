@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface MainDiseaseRepository extends JpaRepository<MainDisease, Long> {
 
-    @Query(value = "SELECT * FROM MainDisease d WHERE d.name LIKE CONCAT('%',:keyword,'%') OR d.code LIKE CONCAT('%',:keyword,'%')", nativeQuery = true)
+    @Query(value = "SELECT * FROM main_disease d WHERE d.code LIKE CONCAT(:keyword,'%')", nativeQuery = true)
     List<MainDisease> findByKeyword(@Param("keyword") String keyword);
 
 }
