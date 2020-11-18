@@ -1,20 +1,14 @@
 .code-column {
     width: 15%;
     padding: 10px;
-}
-
-.border-black-right {
-    border-right: 1px solid black;
-}
-
-.border-black {
-    border: 1px solid black;
+    color: #161216;
 }
 
 .description-column {
     width: 100%;
     font-size: 12px;
     padding-left: 10px;
+    color: #161216;
 }
 
 .border-gray {
@@ -24,10 +18,11 @@
 .name-column {
     width: 85%;
     padding: 10px;
+    color: #161216;
 }
 
 .background-color-main {
-    background-color: #26A69A;
+    background-color: #0F8B8D;
 }
 
 .full-width {
@@ -35,7 +30,7 @@
 }
 
 .unit-table {
-    background-color: #E0F2F1;
+    background-color: #C8F8F9;
     border-collapse: collapse;
 }
 
@@ -52,82 +47,25 @@ table {
     width: 100%;
 }
 
-
-body {
-    color: #566787;
-    background: #f7f5f2;
-    font-family: 'Roboto', sans-serif;
+.chapter a:hover{
+    cursor: pointer;
+    color: #22596D;
 }
 
-.table-responsive {
-    margin: 30px 0;
-}
-
-.table-wrapper {
-    min-width: 100%;
-    background: #fff;
-    padding: 20px 25px;
-    border-radius: 3px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-}
-
-.table-title {
-    color: #fff;
-    background: #40b2cd;
-    padding: 16px 25px;
-    margin: -20px -25px 10px;
-    border-radius: 3px 3px 0 0;
-}
-
-.search-box {
-    position: relative;
-    float: right;
-}
-
-.search-box .input-group {
-    min-width: 250px;
-    position: absolute;
-    right: 0;
-}
-
-.search-box .input-group-addon, .search-box input {
-    border-color: #ddd;
-    border-radius: 0;
+.chapter span{
+    color: white;
 }
 
 .search-box input {
+    width: 180px;
     height: 34px;
-    padding-right: 35px;
     background: #f4fcfd;
     border: none;
     border-radius: 2px !important;
+    font-family: 'Lato', sans-serif;
+
 }
 
 .search-box input:focus {
     background: #fff;
-}
-
-.search-box input::placeholder {
-    font-style: italic;
-}
-
-.search-box .input-group-addon {
-    min-width: 35px;
-    border: none;
-    background: transparent;
-    position: absolute;
-    right: 0;
-    z-index: 9;
-    padding: 6px 0;
-}
-
-.search-box i {
-    color: #a0a5b1;
-    font-size: 19px;
-    position: relative;
-    top: 2px;
-}
-
-.highlight {
-    background-color: yellow;
 }
