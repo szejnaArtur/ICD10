@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zgłoś problem</title>
+
+    <link rel="stylesheet" type="text/css" href="css/common_parts.css"/>
+    <link rel="stylesheet" type="text/css" href="css/problem.css"/>
+</head>
+<body>
+<div class="wrapper">
+    <form class="form" id="contactForm" method="post" novalidate action="/problem">
+        <div class="form-row">
+            <label>Message</label>
+            <textarea name="message" data-error="Musisz wypełnić pole"
+                      placeholder="Napisz nam co się stało."></textarea>
+        </div>
+        <div class="form-row">
+            <button type="submit" class="submit-btn">
+                Wyślij
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
