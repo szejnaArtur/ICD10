@@ -52,7 +52,7 @@ public class DiseaseController {
         int loop = 0;
         boolean isMain = true;
 
-        for ( String i : split ) {
+        for (String i : split) {
             if (loop == 0) {
                 String code = i.substring(0, 3);
                 String name = i.substring(4);
@@ -87,7 +87,7 @@ public class DiseaseController {
     }
 
     private boolean isNumeric(String text) {
-        for ( char c : text.toCharArray() ) {
+        for (char c : text.toCharArray()) {
             if (!Character.isDigit(c)) return false;
         }
         return true;

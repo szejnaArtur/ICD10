@@ -25,7 +25,7 @@ public class UnitDiseaseDescription {
     @JoinColumn(name = "unit_disease_id")
     private UnitDisease unitDisease;
 
-    public static UnitDiseaseDescription of(String text, UnitDisease unitDiseaseId){
+    public static UnitDiseaseDescription of(String text, UnitDisease unitDiseaseId) {
         UnitDiseaseDescription unitDiseaseDescription = new UnitDiseaseDescription();
         unitDiseaseDescription.setText(text);
         unitDiseaseDescription.setUnitDisease(unitDiseaseId);

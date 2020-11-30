@@ -15,17 +15,17 @@ public class ProblemController {
     private ProblemService problemService;
 
     @Autowired
-    public ProblemController(ProblemService problemService){
+    public ProblemController(ProblemService problemService) {
         this.problemService = problemService;
     }
 
     @GetMapping("/problem")
-    public String problemGET(Model model){
+    public String problemGET(Model model) {
         return "problem";
     }
 
     @PostMapping("/problem")
-    public String problemPOST(Model model, @RequestParam("message") String message){
+    public String problemPOST(Model model, @RequestParam("message") String message) {
         Problem problem = Problem.of(message);
         problemService.addProblem(problem);
         return "redirect:diseases";

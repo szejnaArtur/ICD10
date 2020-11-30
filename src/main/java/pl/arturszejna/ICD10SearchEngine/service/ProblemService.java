@@ -11,11 +11,11 @@ public class ProblemService {
     private ProblemRepository problemRepository;
 
     @Autowired
-    public ProblemService(ProblemRepository problemRepository){
+    public ProblemService(ProblemRepository problemRepository) {
         this.problemRepository = problemRepository;
     }
 
-    public void addProblem(Problem problem){
+    public void addProblem(Problem problem) {
         problemRepository.save(problem);
     }
 
