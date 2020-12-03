@@ -2,17 +2,17 @@
 <html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Zgłoś problem</title>
+    <title>Dodaj chorobe</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/common_parts.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/problem.css}"/>
 </head>
 <body>
 <div class="wrapper">
-    <form class="form" id="contactForm" method="post" novalidate action="/problem">
+    <form class="form" id="diseaseForm" method="post" novalidate action="/diseases/add">
         <div class="form-row">
-            <label>Message</label>
-            <textarea name="message" data-error="Musisz wypełnić pole"></textarea>
+            <label>Disease</label>
+            <textarea name="diseaseToAdd" data-error="Musisz wypełnić pole" style="height: 550px; width: 1000px"></textarea>
         </div>
         <div class="form-row">
             <button type="submit" class="submit-btn">

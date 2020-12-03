@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.arturszejna.ICD10SearchEngine.entity.MainDisease;
 import pl.arturszejna.ICD10SearchEngine.entity.MainDiseaseDescription;
 import pl.arturszejna.ICD10SearchEngine.entity.UnitDisease;
@@ -18,6 +20,8 @@ import java.util.List;
 public class DiseaseController {
 
     private MainDiseaseService mainDiseaseService;
+
+    private static final String TEXT = "";
 
     @Autowired
     public DiseaseController(MainDiseaseService mainDiseaseService) {
@@ -39,15 +43,18 @@ public class DiseaseController {
     }
 
     @GetMapping("/diseases/add")
-    public String addDiseaseFromText(Model model) {
+    public String diseaseAddGET(Model model) {
+        return "addDisease";
+    }
 
-        String text = "";
+    @PostMapping("/diseases/add")
+    public String problemPOST(Model model, @RequestParam("diseaseToAdd") String diseaseToAdd) {
 
         MainDisease newDisease = new MainDisease();
         List<MainDiseaseDescription> mainDiseaseDescriptions = new ArrayList<>();
         List<UnitDisease> unitDiseases = new ArrayList<>();
 
-        String[] split = text.split("\n");
+        String[] split = diseaseToAdd.split("\n");
 
         int loop = 0;
         boolean isMain = true;
@@ -83,7 +90,7 @@ public class DiseaseController {
 
         List<MainDisease> mainDiseases = mainDiseaseService.getMainDiseases();
         model.addAttribute("diseases", mainDiseases);
-        return "diseases";
+        return "redirect:add";
     }
 
     private boolean isNumeric(String text) {
